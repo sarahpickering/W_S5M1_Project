@@ -8,8 +8,9 @@ function moduleProject1() {
   // 👉 TASK 1 - Add a "widget" class name to widgets so CSS kicks in
   //  ✨ add your code here
   const widgets = document.querySelectorAll('section>div')
-  widgets.forEach(widget => {
+  widgets.forEach((widget, idx) => {
     widget.classList.add('widget')
+    widget.setAttribute('tabIndex', idx + 1 + "")
   })
 
   // 👉 TASK 2 - Build a "Quote of the Day" widget
@@ -53,10 +54,18 @@ const randomAdverb2 = adverbs[Math.floor(Math.random() * adverbs.length)]
 const randomNoun1 = nouns[Math.floor(Math.random() * nouns.length)]
 const randomNoun2 = nouns[Math.floor(Math.random() * nouns.length)]
 
-const whatWeNeed = `We need to ${randomVerb1} our ${randomNoun1} ${randomAdverb1} in order to ${randomVerb2} our ${randomNoun2} ${randomAdverb2}.`
+// document.querySelector('.corporatespeak')
+// .textContent 
+
+const mumboJumbo = `We need to ${randomVerb1} our ${randomNoun1} ${randomAdverb1} in order to ${randomVerb2} our ${randomNoun2} ${randomAdverb2}.`
 const paragraph = document.createElement('p')
-paragraph.textContent = whatWeNeed
-document.querySelector('.corporateSpeak')
+paragraph.textContent = mumboJumbo
+document.querySelector('.corporatespeak').appendChild(paragraph)
+
+// const mumboJumbo = `We need to ${randomVerb1} our ${randomNoun1} ${randomAdverb1} in order to ${randomVerb2} our ${randomNoun2} ${randomAdverb2}.`
+// const paragraph = document.createElement('p')
+// paragraph.textContent = mumboJumbo
+// document.querySelector('.corporateSpeak').appendChild(paragraph)
  
 // 👉 TASK 4 - Build a "Countdown" widget
   //  ✨ add your code here
@@ -125,6 +134,8 @@ personParagraph.textContent = sentence
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
   //  ✨ add your code here
+
+
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
