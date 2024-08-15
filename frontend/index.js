@@ -67,9 +67,10 @@ const countdown = document.createElement('p')
 countdown.textContent = `T-minus ${count}...`
 countdownWidg.appendChild(countdown)
 
-setInterval(() => {
+const id = setInterval(() => {
   if (count === 1) {
     countdown.textContent = 'Liftoff! 🚀'
+    clearInterval(id)
   } else {
   count--
   countdown.textContent = `T-minus ${count}...`
@@ -79,7 +80,48 @@ setInterval(() => {
 
   // 👉 TASK 5 - Build a "Friends" widget
   //  ✨ add your code here
-  
+
+//This widget will show a random person from the `people` array along with some data related to the person.
+// Start by selecting a random person from the `people` array in `data.js` using `Math.random`.
+// Each person has, among other attributes, a `friends` array containing the IDs of some buddies, who also happen to be persons inside the `people` array.
+// Use the random person to construct the inside of the friends div in the following format:
+// ```html
+// <div class="friends widget">
+//   <h3>Friends</h3>
+//   <p>Michael Chen was born in 1995 and is friends with Carlos Garcia, Mohammed Ali and Jason Wong.</p>
+// </div>
+
+const randomPerson = people[Math.floor(Math.random() * people.length)]
+const personParagraph = document.createElement('p')
+document.querySelector('.friends').appendChild(personParagraph)
+const year = randomPerson.dateOfBirth.split('-')[0]
+let sentence = `${randomPerson.fname} ${randomPerson.lname} was born in ${year} and `
+
+
+if (!randomPerson.friends.length) {
+  sentence += 'has no friends.'
+} else {
+  sentence += 'is friends with '
+  for (let idx = 0; idx < randomPerson.friends.length; idx++) {
+    const friendId = randomPerson.friends[idx]
+    const friend = people.find(p => p.id === friendId)
+    const fullName = `${friend.fname} ${friend.lname}`
+    let isLastIdx = idx === randomPerson.friends.length - 1
+    let isNextToLastIdx = idx === randomPerson.friends.length - 2 
+    if (isLastIdx) {
+      sentence += `${fullName}.`
+    } else if (isNextToLastIdx) {
+      sentence += `${fullName} and `
+    } else {
+      sentence += `${fullName}, `
+    }
+  }
+}
+personParagraph.textContent = sentence
+
+
+
+
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
   //  ✨ add your code here
